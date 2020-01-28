@@ -17,6 +17,8 @@ public class DemoCalculator {
 	private JTextField resultField;
 	
 	private double firstNum;
+	private double secondNum;
+	private double result;
 	private String operations;
 
 	/**
@@ -296,11 +298,50 @@ public class DemoCalculator {
 		frame.getContentPane().add(btnDot);
 		
 		JButton btnPM = new JButton("\u00B1");
+		btnPM.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				double plusminus = 	Double.parseDouble(String.valueOf(resultField.getText()));
+				plusminus = plusminus * (-1);
+				resultField.setText(String.valueOf(plusminus));
+				
+			}
+		});
 		btnPM.setFont(new Font("Tahoma", Font.BOLD, 40));
 		btnPM.setBounds(170, 404, 70, 70);
 		frame.getContentPane().add(btnPM);
 		
 		JButton btnEqual = new JButton("=");
+		btnEqual.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				
+				String answer;
+				secondNum = Double.parseDouble(resultField.getText());
+				
+				if(operations=="+") {
+					result = firstNum + secondNum;
+					answer = String.format("%.2f", result);
+					resultField.setText(answer);
+				}else if(operations=="-") {
+					result = firstNum - secondNum;
+					answer = String.format("%.2f", result);
+					resultField.setText(answer);
+				}else if(operations=="X") {
+					result = firstNum * secondNum;
+					answer = String.format("%.2f", result);
+					resultField.setText(answer);
+				}else if(operations=="/") {
+					result = firstNum / secondNum;
+					answer = String.format("%.2f", result);
+					resultField.setText(answer);
+				}else if(operations=="%") {
+					result = firstNum % secondNum;
+					answer = String.format("%.2f", result);
+					resultField.setText(answer);
+				}
+				
+			}
+		});
 		btnEqual.setFont(new Font("Tahoma", Font.BOLD, 40));
 		btnEqual.setBounds(250, 404, 70, 70);
 		frame.getContentPane().add(btnEqual);
